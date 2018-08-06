@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <!-- Site Properties -->
+    <title>EOS - test</title>
+
+
+
+    <link rel="stylesheet" type="text/css" href="./dist/semantic.min.css">
+
+    <style type="text/css">
+        .hidden.menu {
+            display: none;
+        }
+
+        .masthead.segment {
+            /*      min-height: 700px;*/
+            padding: 1em 0em;
+        }
+
+        .masthead .logo.item img {
+            margin-right: 1em;
+        }
+
+        .masthead .ui.menu .ui.button {
+            margin-left: 0.5em;
+        }
+
+        .masthead h1.ui.header {
+            margin-top: 3em;
+            margin-bottom: 0em;
+            font-size: 4em;
+            font-weight: normal;
+        }
+
+        .masthead h2 {
+            font-size: 1.7em;
+            font-weight: normal;
+        }
+
+        .ui.vertical.stripe {
+            padding: 8em 0em;
+        }
+
+        .ui.vertical.stripe h3 {
+            font-size: 2em;
+        }
+
+        .ui.vertical.stripe .button+h3,
+        .ui.vertical.stripe p+h3 {
+            margin-top: 3em;
+        }
+
+        .ui.vertical.stripe .floated.image {
+            clear: both;
+        }
+
+        .ui.vertical.stripe p {
+            font-size: 1.33em;
+        }
+
+        .ui.vertical.stripe .horizontal.divider {
+            margin: 3em 0em;
+        }
+
+        .quote.stripe.segment {
+            padding: 0em;
+        }
+
+        .quote.stripe.segment .grid .column {
+            padding-top: 5em;
+            padding-bottom: 5em;
+        }
+
+        .footer.segment {
+            padding: 5em 0em;
+        }
+
+        .secondary.pointing.menu .toc.item {
+            display: none;
+        }
+
+        @media only screen and (max-width: 700px) {
+            .ui.fixed.menu {
+                display: none !important;
+            }
+            .secondary.pointing.menu .item,
+            .secondary.pointing.menu .menu {
+                display: none;
+            }
+            .secondary.pointing.menu .toc.item {
+                display: block;
+            }
+            .masthead.segment {
+                /*                min-height: 350px;*/
+            }
+            .masthead h1.ui.header {
+                font-size: 2em;
+                margin-top: 1.5em;
+            }
+            .masthead h2 {
+                margin-top: 0.5em;
+                font-size: 1.5em;
+            }
+
+            .social img {
+                max-width: 22px !important;
+            }
+
+            .ui.items:not(.unstackable)>.item>.image+.content {
+                text-align: center;
+            }
+
+            .jevo-bg-white {
+                margin-top: 20px !important;
+            }
+
+            .ui.grid.positioning>.row {
+                flex-wrap: nowrap !important;
+            }
+        }
+
+        /*********************************
+        my custom styles
+*********************************/
+
+
+
+        .ui.vertical.segment {
+            border-bottom: none;
+        }
+
+        .ui.segment {
+            padding: .2em;
+        }
+
+        .ui.header:first-child {
+            margin-top: 10px !important;
+        }
+
+        .ui.secondary.pointing.menu .active.item {
+            border-color: teal;
+        }
+
+
+        #jevo-bg {
+            background: #E8E8E8;
+            margin-top: 20px;
+        }
+
+        .jevo-bg-white {
+            background: #fff;
+            padding: 12px;
+        }
+
+        .jevo-skills button {
+            margin: 5px !important;
+        }
+
+        .jevo-decrease-padding {
+            padding: 0.2em 0 !important;
+        }
+
+        .jevo-second-menu .item {
+            padding-left: 0 !important;
+        }
+
+        .jevo-relative {
+            position: relative !important;
+        }
+
+        .jevo-absolute {
+            position: absolute !important;
+            top: -30px;
+        }
+
+        .jevo-absolute {
+            position: absolute !important;
+            top: -30px;
+        }
+        
+        .jevo-indent {
+            margin-bottom: 15px;
+        }
+
+
+
+        .social img {
+            max-width: 30px;
+        }
+
+
+
+        .text.grey {
+            color: #CCCCCC;
+        }
+
+        .teal {
+            color: teal;
+        }
+
+        .ui.teal.button {
+            margin-bottom: 23px;
+        }
+
+        .right-button {
+            text-align: right;
+            margin-bottom: 15px;
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="./dist/semantic.min.js"></script>
+    <script>
+        $(document)
+            .ready(function() {
+
+                // fix menu when passed
+                $('.masthead')
+                    .visibility({
+                        once: false,
+                        onBottomPassed: function() {
+                            $('.fixed.menu').transition('fade in');
+                        },
+                        onBottomPassedReverse: function() {
+                            $('.fixed.menu').transition('fade out');
+                        }
+                    });
+
+                // create sidebar and attach to menu open
+                $('.ui.sidebar')
+                    .sidebar('attach events', '.toc.item');
+
+                // create dropdown for choosing database
+                $('.ui.dropdown')
+                    .dropdown({
+                        //                        values: [{
+                        //                                name: 'NewSignal',
+                        //                                value: 'NewSignal'
+                        //                            },
+                        //                            {
+                        //                                name: 'SignalHere',
+                        //                                value: 'SignalHere',
+                        //                                selected: true
+                        //                            }
+                        //                        ]
+                    });
+
+                // create checkbox for choosing database
+                $('.ui.checkbox')
+                    .checkbox();
+
+
+
+            });
+    </script>
+</head>
+
+<body>
+
+    <!-- Following Menu -->
+    <div class="ui large top fixed hidden menu">
+        <div class="ui container">
+            <div class="item">
+                <img src="http://iiitd.ac.in/sites/default/files/images/logo/style1colorlarge.png">
+            </div>
+            <a class="active item">Candidates</a>
+            <a class="item">Jobs</a>
+            <a class="item">Statistics</a>
+            <a class="item">Team Management</a>
+            <div class="right menu">
+                <div class="item">
+                    <a class="ui button">
+                        <i class="bell icon"></i>
+                    Notifications</a>
+                </div>
+                <div class="item">
+                    <a class="ui label">
+                        <img class="ui right spaced avatar image"
+                             src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Phoenicopterus_ruber_in_S%C3%A3o_Paulo_Zoo.jpg"
+                             alt="user">
+                      User name
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <div class="ui vertical sidebar menu">
+        <a class="active item">Candidates</a>
+        <a class="item">Jobs</a>
+        <a class="item">Statistics</a>
+        <a class="item">Team Management</a>
+    </div>
+
+
+    <!-- Page Contents -->
+    <div class="pusher">
+        <div class="ui inverted vertical masthead center aligned segment">
+
+            <div class="ui container">
+                <div class="ui large secondary inverted pointing menu">
+                    <a class="toc item">
+                        <i class="sidebar icon"></i>
+                    </a>
+                    <div class="item">
+                        <img src="http://iiitd.ac.in/sites/default/files/images/logo/style1colorlarge.png">
+                    </div>
+                    <a class="active item">Candidates</a>
+                    <a class="item">Jobs</a>
+                    <a class="item">Statistics</a>
+                    <a class="item">Team Management</a>
+                    <div class="right menu">
+                        <div class="item">
+                            <a class="ui button">
+                        <i class="bell icon"></i>
+                    Notifications</a>
+                        </div>
+                        <div class="item">
+                            <a class="ui label">
+                        <img class="ui right spaced avatar image"
+                             src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Phoenicopterus_ruber_in_S%C3%A3o_Paulo_Zoo.jpg"
+                             alt="user">
+                      User name
+                    </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--
+    <div class="ui text container">
+      <h1 class="ui inverted header">
+        Imagine-a-Company
+      </h1>
+      <h2>Do whatever you want when you want to.</h2>
+      <div class="ui huge primary button">Get Started <i class="right arrow icon"></i></div>
+    </div>
+-->
+
+        </div>
+
+        <div class="ui three column doubling stackable grid container" id="jevo-bg">
+            <div class="column center four wide">
+                <h2 class="ui header">Candidates</h2>
+
+                <form class="ui form">
+                    <div class="field">
+                        <label>Choose database</label>
+                        <div class="ui selection dropdown">
+                            <input type="hidden" name="database">
+                            <i class="dropdown icon"></i>
+                            <div class="default text">Database</div>
+                            <div class="menu">
+                                <div class="item" data-value="newsignal" data-text="NewSignal">
+                                    NewSignal
+                                </div>
+                                <div class="item" data-value="signalhere" data-text="SignalHere">
+                                    SignalHere
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Keywords</label>
+                        <input type="text" name="last-name" placeholder="Enter a keywords">
+                    </div>
+
+                    <div class="field">
+                        <div class="ui checkbox">
+                            <input type="checkbox" tabindex="0" class="hidden">
+                            <label>Ready to switch</label>
+                        </div>
+                        <div class="ui checkbox">
+                            <input type="checkbox" tabindex="0" class="hidden">
+                            <label>Likely to switch</label>
+                        </div>
+                    </div>
+
+
+                    <div class="field">
+                        <label>Location</label>
+                        <select class="ui search dropdown">
+                                    <option value="">Choose a location</option>
+                                    <option value="AL">Alabama</option>
+                                    <option value="CO">Colorado</option>
+                                    <option value="CT">Connecticut</option>
+                                    <option value="DE">Delaware</option>
+                                    <option value="DC">District Of Columbia</option>
+                                    <option value="FL">Florida</option>
+                                    <option value="GA">Georgia</option>
+                                    <option value="HI">Hawaii</option>
+                                    <option value="ID">Idaho</option>
+                                    <option value="IL">Illinois</option>
+                                </select>
+                    </div>
+                    <div class="field">
+                        <label>Skills</label>
+                        <input type="text" name="last-name" placeholder="Enter skills">
+                    </div>
+
+                    <div class="field">
+                        <label>Company</label>
+                        <input type="text" name="last-name" placeholder="Enter company">
+                    </div>
+
+                    <div class="field">
+                        <div class="ui checkbox">
+                            <input type="checkbox" tabindex="0" class="hidden">
+                            <label>Ready to switch</label>
+                        </div>
+                    </div>
+
+
+                    <button class="ui button red" type="reset" value="Reset">Reset</button>
+                    <button class="ui button teal" type="submit">Search</button>
+
+
+                </form>
+            </div>
+            <div class="column center six wide">
+                <div class="ui vertical segment">
+                    <div class="ui stackable grid container">
+                        <div class="row jevo-indent">
+                            <div class="ten wide column">
+                                <div class="meta">
+                                    Found: 46468
+                                </div>
+                                <div class="meta">
+                                    Likely + ready to switch: 12640
+                                </div>
+                            </div>
+
+                            <div class="six wide column">
+                                <div class="meta">
+                                    Sort by:
+
+
+                                    <div class="ui dropdown teal">
+                                        <div class="text">Data</div>
+                                        <i class="dropdown icon"></i>
+                                        <div class="menu">
+                                            <div class="item">Week</div>
+                                            <div class="item">Month</div>
+                                            <div class="item">Year</div>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="ui items jevo-bg-white">
+                        <div class="item">
+                            <a class="ui tiny image">
+                                <img src="https://www.proza.ru/pics/2012/11/27/381.jpg">
+                            </a>
+                            <div class="content">
+                                <a class="header">Yaroslav Birzool</a>
+                                <div class="description">
+                                    <p></p>
+                                    <p></p>
+                                    <div class="meta">
+                                        UIX Designer at UX Depot
+                                    </div>
+                                    <div class="meta">
+                                        Los Angeles, California, USA
+                                    </div>
+                                    <div class="meta">
+                                        11 years experience
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="ui stackable grid container">
+                            <div class="row">
+                                <div class="three wide column">
+                                    <p>Prev</p>
+                                </div>
+                                <div class="twelve wide right column">
+                                    <p>UX Designer at People Media PLC, Promo Designer at Industries Inc., UI Designer at Solutions Eduonix, <a href="#">1 more</a></p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="ui stackable grid container">
+                            <div class="row">
+                                <div class="three wide column">
+                                    <p>Skills</p>
+                                </div>
+                                <div class="twelve wide right column">
+                                    <p>User Interface Design, User Experience, Web Design, Responsive Design, Usability, iOS Apps Design, <a href="#">10 more</a></p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+
+                </div>
+                <div class="ui vertical segment">
+                    <div class="ui items jevo-bg-white">
+                        <div class="item">
+                            <a class="ui tiny image">
+                                <img src="https://www.meme-arsenal.com/memes/90f1d2b800396ed7cdcb7b9bf30db3b8.jpg">
+                            </a>
+                            <div class="content">
+                                <a class="header">Yaroslav Birzool</a>
+                                <div class="description">
+                                    <p></p>
+                                    <p></p>
+                                    <div class="meta">
+                                        UIX Designer at UX Depot
+                                    </div>
+                                    <div class="meta">
+                                        Los Angeles, California, USA
+                                    </div>
+                                    <div class="meta">
+                                        11 years experience
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="ui stackable grid container">
+                            <div class="row">
+                                <div class="three wide column">
+                                    <p>Prev</p>
+                                </div>
+                                <div class="twelve wide right column">
+                                    <p>UX Designer at People Media PLC, Promo Designer at Industries Inc., UI Designer at Solutions Eduonix, <a href="#">1 more</a></p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="ui stackable grid container">
+                            <div class="row">
+                                <div class="three wide column">
+                                    <p>Skills</p>
+                                </div>
+                                <div class="twelve wide right column">
+                                    <p>User Interface Design, User Experience, Web Design, Responsive Design, Usability, iOS Apps Design, <a href="#">10 more</a></p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="ui vertical segment">
+                    <div class="ui items jevo-bg-white">
+                        <div class="item">
+                            <a class="ui tiny image">
+                                <img src="https://mtdata.ru/u33/photoBFBF/20995698806-0/huge.jpeg">
+                            </a>
+                            <div class="content">
+                                <a class="header">Yaroslav Birzool</a>
+                                <div class="description">
+                                    <p></p>
+                                    <p></p>
+                                    <div class="meta">
+                                        UIX Designer at UX Depot
+                                    </div>
+                                    <div class="meta">
+                                        Los Angeles, California, USA
+                                    </div>
+                                    <div class="meta">
+                                        11 years experience
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="ui stackable grid container">
+                            <div class="row">
+                                <div class="three wide column">
+                                    <p>Prev</p>
+                                </div>
+                                <div class="twelve wide right column">
+                                    <p>UX Designer at People Media PLC, Promo Designer at Industries Inc., UI Designer at Solutions Eduonix, <a href="#">1 more</a></p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="ui stackable grid container">
+                            <div class="row">
+                                <div class="three wide column">
+                                    <p>Skills</p>
+                                </div>
+                                <div class="twelve wide right column">
+                                    <p>User Interface Design, User Experience, Web Design, Responsive Design, Usability, iOS Apps Design, <a href="#">10 more</a></p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="ui vertical segment">
+                    <div class="ui items jevo-bg-white">
+                        <div class="item">
+                            <a class="ui tiny image">
+                                <img src="http://www.peoples.ru/images/interesting/interesting_201501120656205.jpg">
+                            </a>
+                            <div class="content">
+                                <a class="header">Yaroslava Birzool</a>
+                                <div class="description">
+                                    <p></p>
+                                    <p></p>
+                                    <div class="meta">
+                                        UIX Designer at UX Depot
+                                    </div>
+                                    <div class="meta">
+                                        Los Angeles, California, USA
+                                    </div>
+                                    <div class="meta">
+                                        11 years experience
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="ui stackable grid container">
+                            <div class="row">
+                                <div class="three wide column">
+                                    <p>Prev</p>
+                                </div>
+                                <div class="twelve wide right column">
+                                    <p>UX Designer at People Media PLC, Promo Designer at Industries Inc., UI Designer at Solutions Eduonix, <a href="#">1 more</a></p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="ui stackable grid container">
+                            <div class="row">
+                                <div class="three wide column">
+                                    <p>Skills</p>
+                                </div>
+                                <div class="twelve wide right column">
+                                    <p>User Interface Design, User Experience, Web Design, Responsive Design, Usability, iOS Apps Design, <a href="#">10 more</a></p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="column center six wide last-column">
+
+                <div class="right-button">
+                    <button class="ui button">
+                      Import Candidate
+                    </button>
+                    <button class="ui teal button">
+                      Add new Candidate
+                    </button>
+
+                </div>
+
+
+
+
+
+                <div class="ui vertical segment">
+                    <div class="ui items jevo-bg-white">
+
+                        <div class="ui stackable grid container positioning">
+
+                            <div class="row jevo-relative">
+                                <div class="five wide column">
+                                    <a href="#">
+                                        <img class="ui tiny circular image jevo-absolute" src="https://www.famousbirthdays.com/faces/granny-image.jpg">
+                                    </a>
+                                </div>
+                                <div class="nine wide right column">
+                                    <div class="content">
+                                        <a href="#">John Smith</a>
+                                        <div class="description">
+                                            <div class="meta">
+                                                <i class="briefcase orange icon"></i> Likely to switch
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="one wide right column">
+                                    <div class="content">
+                                        <i class="pencil alternate grey icon"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="ui stackable grid container positioning">
+                            <div class="row jevo-decrease-padding">
+                                <div class="five wide column">
+                                    <p class="text grey">Position:</p>
+                                </div>
+                                <div class="eleven wide right column">
+                                    <p>UX/UI Designer</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="ui stackable grid container positioning">
+
+                            <div class="row jevo-decrease-padding">
+                                <div class="five wide column">
+                                    <p class="text grey">Company:</p>
+                                </div>
+                                <div class="eleven wide right column">
+                                    <p>Noosphere Ventures</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ui stackable grid container positioning">
+
+                            <div class="row jevo-decrease-padding">
+                                <div class="five wide column">
+                                    <p class="text grey">Location</p>
+                                </div>
+                                <div class="eleven wide right column">
+                                    <p>Los Angeles, California, US</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ui stackable grid container positioning">
+
+                            <div class="row jevo-decrease-padding">
+                                <div class="five wide column">
+                                    <p class="text grey">Experience:</p>
+                                </div>
+                                <div class="eleven wide right column">
+                                    <p>6 years</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ui stackable grid container positioning">
+
+                            <div class="row jevo-decrease-padding">
+                                <div class="five wide column">
+                                    <p class="text grey">Phone:</p>
+                                </div>
+                                <div class="eleven wide right column">
+                                    <p>068 157 33 88</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ui middle aligned stackable grid container positioning">
+
+                            <div class="row">
+                                <div class="five wide column">
+                                    <p class="text grey">Contacts:</p>
+                                </div>
+                                <div class="nine wide right column social">
+                                    <a href="#"><img src="https://image.flaticon.com/icons/svg/1053/1053189.svg" alt="mail"></a>
+                                    <a href="#"><img src="https://image.flaticon.com/icons/svg/187/187190.svg" alt="skype"></a>
+                                    <a href="#"><img src="https://image.flaticon.com/icons/svg/145/145802.svg" alt="fb"></a>
+                                    <a href="#"><img src="https://image.flaticon.com/icons/svg/145/145813.svg" alt="vk"></a>
+                                    <a href="#"><img src="https://image.flaticon.com/icons/svg/145/145812.svg" alt="twitter"></a>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ui middle aligned stackable grid container positioning">
+
+                            <div class="row">
+                                <div class="five wide column">
+                                    <p class="text grey">Recrutement:</p>
+                                </div>
+                                <div class="eleven wide right column">
+                                    <button class="fluid toggle ui teal button">Add to job</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="ui secondary pointing menu jevo-second-menu">
+                            <a class="active item">
+                                Profile
+                             </a>
+                            <a class="item">
+                                History
+                             </a>
+                            <a class="item">
+                                Test files
+                             </a>
+
+
+                        </div>
+                        <div class="row jevo-skills">
+                            <h3 class="ui header">Skills</h3>
+
+                            <button class="ui mini button">
+                                Product Launch
+                            </button>
+                            <button class="ui mini button">
+                            Project Mamagement
+                            </button>
+                            <button class="ui mini button">
+                                C++
+                            </button>
+                            <button class="ui mini button">
+                                Java
+                            </button>
+                            <button class="ui mini button">
+                                PHP
+                            </button>
+                            <button class="ui mini button">
+                                Web Analitics
+                            </button>
+                        </div>
+
+
+                        <div class="row">
+                            <h3 class="ui header">Work experience</h3>
+
+                            <div class="ui stackable grid container">
+
+                                <div class="row jevo-decrease-padding">
+                                    <div class="six wide column">
+                                        <p class="text grey">01.2014 - current time</p>
+                                    </div>
+                                    <div class="ten wide right column">
+                                        <p>Junior Project Manager</p>
+                                        <p class="text grey">Eduonix Learning Solutions Pvt Ltd</p>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ui stackable grid container">
+
+                                <div class="row jevo-decrease-padding">
+                                    <div class="six wide column">
+                                        <p class="text grey">06.2011 - 01.2014</p>
+                                    </div>
+                                    <div class="ten wide right column">
+                                        <p>Junior Chmo</p>
+                                        <p class="text grey">Learning Solutions Eduonix</p>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <h3 class="ui header">Education</h3>
+
+                            <div class="ui stackable grid container">
+
+                                <div class="row jevo-decrease-padding">
+                                    <div class="six wide column">
+                                        <p class="text grey">2011 - 2014</p>
+                                    </div>
+                                    <div class="ten wide right column">
+                                        <p>Internet Marketing Courses</p>
+                                        <p class="text grey">Eduonix Solutions Ltd</p>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ui stackable grid container">
+
+                                <div class="row jevo-decrease-padding">
+                                    <div class="six wide column">
+                                        <p class="text grey">2009 - 2010</p>
+                                    </div>
+                                    <div class="ten wide right column">
+                                        <p>Photoshop Courses</p>
+                                        <p class="text grey">'Step' Academy</p>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+</body>
+
+</html>
